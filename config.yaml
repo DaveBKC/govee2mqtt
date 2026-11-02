@@ -1,5 +1,5 @@
 name: Govee to MQTT Bridge (test)
-version: "kettle-out-of-water-test"
+version: "kettle-test-2"
 slug: govee2mqtt_test
 description: Test build of govee2mqtt with the kettle Out of Water sensor. Run only while the regular Govee bridge is stopped.
 url: https://github.com/wez/govee2mqtt

@@ -2,9 +2,14 @@
 ARG BUILD_FROM
 FROM rust:1-bookworm AS builder
 ARG REPO=https://github.com/DaveBKC/govee2mqtt.git
-ARG BRANCH=kettle-out-of-water
-RUN git clone --depth 1 --branch "$BRANCH" "$REPO" /src
+# Pinned commit on the kettle-out-of-water branch; bumping it makes
+# Home Assistant rebuild instead of reusing a cached checkout.
+ARG COMMIT=806169a3
 WORKDIR /src
+RUN git init -q . && git remote add origin "$REPO" \
+ && git fetch -q --depth 1 origin kettle-out-of-water \
+ && git checkout -q FETCH_HEAD \
+ && git log --oneline -1 | grep -q "^${COMMIT}"
 RUN cargo build --release --locked
 
 FROM $BUILD_FROM
