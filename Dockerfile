@@ -4,7 +4,7 @@ FROM rust:1-bookworm AS builder
 ARG REPO=https://github.com/DaveBKC/govee2mqtt.git
 # Pinned commit on the kettle-out-of-water branch; bumping it makes
 # Home Assistant rebuild instead of reusing a cached checkout.
-ARG COMMIT=806169a3
+ARG COMMIT=806169a
 WORKDIR /src
 RUN git init -q . && git remote add origin "$REPO" \
  && git fetch -q --depth 1 origin kettle-out-of-water \
